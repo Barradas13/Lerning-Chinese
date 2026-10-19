@@ -1,0 +1,1324 @@
+{
+  "lessons": [
+    {
+      "_extraction_id": "669f09c7-e511-4bbf-ba7a-6ac07433b00f",
+      "_source_file": "New HSK Course 1 (HSK3.0).pdf",
+      "_schema": "example",
+      "_schema_version": "unknown",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "你好，小语！",
+          "characters": [
+            {
+              "char": "你",
+              "pinyin": "nǐ",
+              "meaning": "you"
+            },
+            {
+              "char": "好",
+              "pinyin": "hǎo",
+              "meaning": "good; well (hello)"
+            },
+            {
+              "char": "小语",
+              "pinyin": "Xiǎoyǔ",
+              "meaning": "Xiaoyu (name)"
+            },
+            {
+              "char": "老师",
+              "pinyin": "lǎoshī",
+              "meaning": "teacher"
+            },
+            {
+              "char": "学生",
+              "pinyin": "xuésheng",
+              "meaning": "student"
+            },
+            {
+              "char": "谢谢",
+              "pinyin": "xièxie",
+              "meaning": "thank you"
+            },
+            {
+              "char": "不客气",
+              "pinyin": "bù kèqi",
+              "meaning": "you're welcome"
+            },
+            {
+              "char": "同学",
+              "pinyin": "tóngxué",
+              "meaning": "classmate"
+            },
+            {
+              "char": "再见",
+              "pinyin": "zàijiàn",
+              "meaning": "goodbye"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "我叫李文",
+          "characters": [
+            {
+              "char": "请问",
+              "pinyin": "qǐngwèn",
+              "meaning": "excuse me; may I ask"
+            },
+            {
+              "char": "你",
+              "pinyin": "nǐ",
+              "meaning": "you (singular)"
+            },
+            {
+              "char": "叫",
+              "pinyin": "jiào",
+              "meaning": "be called; call"
+            },
+            {
+              "char": "什么",
+              "pinyin": "shénme",
+              "meaning": "what"
+            },
+            {
+              "char": "名字",
+              "pinyin": "míngzi",
+              "meaning": "name"
+            },
+            {
+              "char": "我",
+              "pinyin": "wǒ",
+              "meaning": "I; me"
+            },
+            {
+              "char": "不",
+              "pinyin": "bù",
+              "meaning": "not; no"
+            },
+            {
+              "char": "是",
+              "pinyin": "shì",
+              "meaning": "be"
+            },
+            {
+              "char": "对不起",
+              "pinyin": "duìbuqǐ",
+              "meaning": "sorry"
+            },
+            {
+              "char": "没关系",
+              "pinyin": "méi guānxi",
+              "meaning": "that's all right; never mind"
+            },
+            {
+              "char": "很",
+              "pinyin": "hěn",
+              "meaning": "very"
+            },
+            {
+              "char": "高兴",
+              "pinyin": "gāoxìng",
+              "meaning": "glad; happy"
+            },
+            {
+              "char": "认识",
+              "pinyin": "rènshi",
+              "meaning": "know; become acquainted with"
+            },
+            {
+              "char": "也",
+              "pinyin": "yě",
+              "meaning": "also; too"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "title": "我是中国人",
+          "characters": [
+            {
+              "char": "人",
+              "pinyin": "rén",
+              "meaning": "human; person"
+            },
+            {
+              "char": "中国",
+              "pinyin": "Zhōngguó",
+              "meaning": "China"
+            },
+            {
+              "char": "法国",
+              "pinyin": "Fǎguó",
+              "meaning": "France"
+            },
+            {
+              "char": "中文",
+              "pinyin": "Zhōngwén",
+              "meaning": "Chinese language"
+            },
+            {
+              "char": "这",
+              "pinyin": "zhè",
+              "meaning": "this"
+            },
+            {
+              "char": "谁",
+              "pinyin": "shéi",
+              "meaning": "who"
+            },
+            {
+              "char": "女朋友",
+              "pinyin": "nǚpéngyou",
+              "meaning": "girlfriend"
+            },
+            {
+              "char": "哪",
+              "pinyin": "nǎ",
+              "meaning": "which"
+            },
+            {
+              "char": "泰国",
+              "pinyin": "Tàiguó",
+              "meaning": "Thailand"
+            },
+            {
+              "char": "忙",
+              "pinyin": "máng",
+              "meaning": "busy"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "title": "我有两个孩子",
+          "characters": [
+            {
+              "char": "有",
+              "pinyin": "yǒu",
+              "meaning": "have"
+            },
+            {
+              "char": "没",
+              "pinyin": "méi",
+              "meaning": "not have"
+            },
+            {
+              "char": "家",
+              "pinyin": "jiā",
+              "meaning": "family; home"
+            },
+            {
+              "char": "几",
+              "pinyin": "jǐ",
+              "meaning": "how many"
+            },
+            {
+              "char": "口",
+              "pinyin": "kǒu",
+              "meaning": "measure word (family members)"
+            },
+            {
+              "char": "爸爸",
+              "pinyin": "bàba",
+              "meaning": "father"
+            },
+            {
+              "char": "妈妈",
+              "pinyin": "māma",
+              "meaning": "mother"
+            },
+            {
+              "char": "妹妹",
+              "pinyin": "mèimei",
+              "meaning": "younger sister"
+            },
+            {
+              "char": "和",
+              "pinyin": "hé",
+              "meaning": "and"
+            },
+            {
+              "char": "哥哥",
+              "pinyin": "gēge",
+              "meaning": "elder brother"
+            },
+            {
+              "char": "姐姐",
+              "pinyin": "jiějie",
+              "meaning": "elder sister"
+            },
+            {
+              "char": "个",
+              "pinyin": "gè",
+              "meaning": "general measure word"
+            },
+            {
+              "char": "儿子",
+              "pinyin": "érzi",
+              "meaning": "son"
+            },
+            {
+              "char": "孩子",
+              "pinyin": "háizi",
+              "meaning": "child"
+            },
+            {
+              "char": "岁",
+              "pinyin": "suì",
+              "meaning": "year (of age)"
+            },
+            {
+              "char": "大",
+              "pinyin": "dà",
+              "meaning": "old; big"
+            },
+            {
+              "char": "女儿",
+              "pinyin": "nǚ'ér",
+              "meaning": "daughter"
+            },
+            {
+              "char": "多少",
+              "pinyin": "duōshao",
+              "meaning": "how many; how much"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "title": "我今天休息",
+          "characters": [
+            {
+              "char": "今天",
+              "pinyin": "jīntiān",
+              "meaning": "today"
+            },
+            {
+              "char": "号",
+              "pinyin": "hào",
+              "meaning": "(date) number"
+            },
+            {
+              "char": "星期",
+              "pinyin": "xīngqī",
+              "meaning": "week"
+            },
+            {
+              "char": "休息",
+              "pinyin": "xiūxi",
+              "meaning": "rest; take a break"
+            },
+            {
+              "char": "会",
+              "pinyin": "huì",
+              "meaning": "can; be able to"
+            },
+            {
+              "char": "做饭",
+              "pinyin": "zuòfàn",
+              "meaning": "cook"
+            },
+            {
+              "char": "面条儿",
+              "pinyin": "miàntiáor",
+              "meaning": "noodles"
+            },
+            {
+              "char": "饺子",
+              "pinyin": "jiǎozi",
+              "meaning": "dumpling"
+            },
+            {
+              "char": "一些",
+              "pinyin": "yīxiē",
+              "meaning": "some"
+            },
+            {
+              "char": "菜",
+              "pinyin": "cài",
+              "meaning": "dish; vegetable"
+            },
+            {
+              "char": "上班",
+              "pinyin": "shàngbān",
+              "meaning": "go to work"
+            },
+            {
+              "char": "下班",
+              "pinyin": "xiàbān",
+              "meaning": "get off work"
+            },
+            {
+              "char": "新",
+              "pinyin": "xīn",
+              "meaning": "new"
+            },
+            {
+              "char": "电脑",
+              "pinyin": "diànnǎo",
+              "meaning": "computer"
+            },
+            {
+              "char": "真",
+              "pinyin": "zhēn",
+              "meaning": "really; truly"
+            },
+            {
+              "char": "好看",
+              "pinyin": "hǎokàn",
+              "meaning": "good-looking; nice"
+            },
+            {
+              "char": "喜欢",
+              "pinyin": "xǐhuan",
+              "meaning": "like"
+            },
+            {
+              "char": "它",
+              "pinyin": "tā",
+              "meaning": "it"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "title": "你的手机号是多少？",
+          "characters": [
+            {
+              "char": "手机",
+              "pinyin": "shǒujī",
+              "meaning": "cell phone"
+            },
+            {
+              "char": "多少",
+              "pinyin": "duōshao",
+              "meaning": "how many; how much"
+            },
+            {
+              "char": "想",
+              "pinyin": "xiǎng",
+              "meaning": "want; would like"
+            },
+            {
+              "char": "去",
+              "pinyin": "qù",
+              "meaning": "go"
+            },
+            {
+              "char": "超市",
+              "pinyin": "chāoshì",
+              "meaning": "supermarket"
+            },
+            {
+              "char": "牛奶",
+              "pinyin": "niúnǎi",
+              "meaning": "milk"
+            },
+            {
+              "char": "明天",
+              "pinyin": "míngtiān",
+              "meaning": "tomorrow"
+            },
+            {
+              "char": "晚饭",
+              "pinyin": "wǎnfàn",
+              "meaning": "dinner; supper"
+            },
+            {
+              "char": "那边",
+              "pinyin": "nàbiān",
+              "meaning": "there"
+            },
+            {
+              "char": "包子",
+              "pinyin": "bāozi",
+              "meaning": "steamed stuffed bun"
+            },
+            {
+              "char": "非常",
+              "pinyin": "fēicháng",
+              "meaning": "very; extremely"
+            },
+            {
+              "char": "好吃",
+              "pinyin": "hǎochī",
+              "meaning": "tasty; delicious"
+            },
+            {
+              "char": "米饭",
+              "pinyin": "mǐfàn",
+              "meaning": "(cooked) rice"
+            },
+            {
+              "char": "怎么",
+              "pinyin": "zěnme",
+              "meaning": "how"
+            },
+            {
+              "char": "坐",
+              "pinyin": "zuò",
+              "meaning": "take; travel by"
+            },
+            {
+              "char": "出租车",
+              "pinyin": "chūzūchē",
+              "meaning": "taxi"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "title": "我晚上六点半下班",
+          "characters": [
+            {
+              "char": "现在",
+              "pinyin": "xiànzài",
+              "meaning": "now"
+            },
+            {
+              "char": "点",
+              "pinyin": "diǎn",
+              "meaning": "o'clock"
+            },
+            {
+              "char": "早上",
+              "pinyin": "zǎoshang",
+              "meaning": "(early) morning"
+            },
+            {
+              "char": "上午",
+              "pinyin": "shàngwǔ",
+              "meaning": "morning"
+            },
+            {
+              "char": "分",
+              "pinyin": "fēn",
+              "meaning": "minute"
+            },
+            {
+              "char": "课",
+              "pinyin": "kè",
+              "meaning": "class; lesson"
+            },
+            {
+              "char": "下午",
+              "pinyin": "xiàwǔ",
+              "meaning": "afternoon"
+            },
+            {
+              "char": "见",
+              "pinyin": "jiàn",
+              "meaning": "meet; see"
+            },
+            {
+              "char": "吧",
+              "pinyin": "ba",
+              "meaning": "used at the end of a sentence to express suggestions, consultations, or requests"
+            },
+            {
+              "char": "电影院",
+              "pinyin": "diànyǐngyuàn",
+              "meaning": "cinema"
+            },
+            {
+              "char": "看",
+              "pinyin": "kàn",
+              "meaning": "watch; look at; read"
+            },
+            {
+              "char": "电影",
+              "pinyin": "diànyǐng",
+              "meaning": "movie; film"
+            },
+            {
+              "char": "事",
+              "pinyin": "shì",
+              "meaning": "thing; affair"
+            },
+            {
+              "char": "上课",
+              "pinyin": "shàngkè",
+              "meaning": "attend a class"
+            },
+            {
+              "char": "呢",
+              "pinyin": "ne",
+              "meaning": "(modal particle)"
+            },
+            {
+              "char": "半",
+              "pinyin": "bàn",
+              "meaning": "half"
+            },
+            {
+              "char": "下课",
+              "pinyin": "xiàkè",
+              "meaning": "dismiss a class"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "title": "我爸爸也在医院工作",
+          "characters": [
+            {
+              "char": "在",
+              "pinyin": "zài",
+              "meaning": "at; in"
+            },
+            {
+              "char": "学校",
+              "pinyin": "xuéxiào",
+              "meaning": "school"
+            },
+            {
+              "char": "前",
+              "pinyin": "qián",
+              "meaning": "front"
+            },
+            {
+              "char": "午饭",
+              "pinyin": "wǔfàn",
+              "meaning": "lunch"
+            },
+            {
+              "char": "饭",
+              "pinyin": "fàn",
+              "meaning": "meal"
+            },
+            {
+              "char": "大",
+              "pinyin": "dà",
+              "meaning": "big; large"
+            },
+            {
+              "char": "多",
+              "pinyin": "duō",
+              "meaning": "many; much"
+            },
+            {
+              "char": "医生",
+              "pinyin": "yīshēng",
+              "meaning": "doctor"
+            },
+            {
+              "char": "工作",
+              "pinyin": "gōngzuò",
+              "meaning": "work; job"
+            },
+            {
+              "char": "医院",
+              "pinyin": "yīyuàn",
+              "meaning": "hospital"
+            },
+            {
+              "char": "房间",
+              "pinyin": "fángjiān",
+              "meaning": "room"
+            },
+            {
+              "char": "外",
+              "pinyin": "wài",
+              "meaning": "outside"
+            },
+            {
+              "char": "只",
+              "pinyin": "zhī",
+              "meaning": "measure word (for certain animals)"
+            },
+            {
+              "char": "小猫",
+              "pinyin": "xiǎomāo",
+              "meaning": "little cat"
+            },
+            {
+              "char": "看见",
+              "pinyin": "kànjiàn",
+              "meaning": "see"
+            },
+            {
+              "char": "桌子",
+              "pinyin": "zhuōzi",
+              "meaning": "table"
+            },
+            {
+              "char": "下",
+              "pinyin": "xià",
+              "meaning": "under"
+            },
+            {
+              "char": "漂亮",
+              "pinyin": "piàoliang",
+              "meaning": "pretty; beautiful"
+            },
+            {
+              "char": "能",
+              "pinyin": "néng",
+              "meaning": "can; be able to"
+            },
+            {
+              "char": "书店",
+              "pinyin": "shūdiàn",
+              "meaning": "bookstore"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "title": "我明天上午在学校学习",
+          "characters": [
+            {
+              "char": "前边",
+              "pinyin": "qiánbiān",
+              "meaning": "front"
+            },
+            {
+              "char": "那个",
+              "pinyin": "nàge",
+              "meaning": "that"
+            },
+            {
+              "char": "外边",
+              "pinyin": "wàibiān",
+              "meaning": "outside"
+            },
+            {
+              "char": "书",
+              "pinyin": "shū",
+              "meaning": "book"
+            },
+            {
+              "char": "白天",
+              "pinyin": "báitiān",
+              "meaning": "daytime"
+            },
+            {
+              "char": "和",
+              "pinyin": "hé",
+              "meaning": "with; and"
+            },
+            {
+              "char": "朋友",
+              "pinyin": "péngyou",
+              "meaning": "friend"
+            },
+            {
+              "char": "唱",
+              "pinyin": "chàng",
+              "meaning": "sing"
+            },
+            {
+              "char": "歌",
+              "pinyin": "gē",
+              "meaning": "song"
+            },
+            {
+              "char": "好听",
+              "pinyin": "hǎotīng",
+              "meaning": "pleasant to hear"
+            },
+            {
+              "char": "电视",
+              "pinyin": "diànshì",
+              "meaning": "television"
+            },
+            {
+              "char": "狗",
+              "pinyin": "gǒu",
+              "meaning": "dog"
+            },
+            {
+              "char": "玩",
+              "pinyin": "wán",
+              "meaning": "play"
+            },
+            {
+              "char": "学习",
+              "pinyin": "xuéxí",
+              "meaning": "study; learn"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "title": "这里的苹果真便宜！",
+          "characters": [
+            {
+              "char": "杯子",
+              "pinyin": "bēizi",
+              "meaning": "cup; glass"
+            },
+            {
+              "char": "售货员",
+              "pinyin": "shòuhuòyuán",
+              "meaning": "shop assistant; salesperson"
+            },
+            {
+              "char": "这边",
+              "pinyin": "zhèbiān",
+              "meaning": "here; this side"
+            },
+            {
+              "char": "钱",
+              "pinyin": "qián",
+              "meaning": "money"
+            },
+            {
+              "char": "这些",
+              "pinyin": "zhèxiē",
+              "meaning": "these"
+            },
+            {
+              "char": "块",
+              "pinyin": "kuài",
+              "meaning": "unit of money (yuan)"
+            },
+            {
+              "char": "那些",
+              "pinyin": "nàxiē",
+              "meaning": "those"
+            },
+            {
+              "char": "这儿",
+              "pinyin": "zhèr",
+              "meaning": "here"
+            },
+            {
+              "char": "水果",
+              "pinyin": "shuǐguǒ",
+              "meaning": "fruit"
+            },
+            {
+              "char": "少",
+              "pinyin": "shǎo",
+              "meaning": "few; little"
+            },
+            {
+              "char": "斤",
+              "pinyin": "jīn",
+              "meaning": "jin (unit of weight)"
+            },
+            {
+              "char": "苹果",
+              "pinyin": "píngguǒ",
+              "meaning": "apple"
+            },
+            {
+              "char": "便宜",
+              "pinyin": "piányi",
+              "meaning": "cheap; affordable"
+            },
+            {
+              "char": "商店",
+              "pinyin": "shāngdiàn",
+              "meaning": "shop; store"
+            },
+            {
+              "char": "衣服",
+              "pinyin": "yīfu",
+              "meaning": "clothes"
+            },
+            {
+              "char": "件",
+              "pinyin": "jiàn",
+              "meaning": "piece (measure word)"
+            },
+            {
+              "char": "元",
+              "pinyin": "yuán",
+              "meaning": "yuan (unit of money)"
+            },
+            {
+              "char": "怎么样",
+              "pinyin": "zěnmeyàng",
+              "meaning": "how about; what do you think"
+            },
+            {
+              "char": "穿",
+              "pinyin": "chuān",
+              "meaning": "wear; put on"
+            },
+            {
+              "char": "女",
+              "pinyin": "nǚ",
+              "meaning": "female; woman"
+            },
+            {
+              "char": "男",
+              "pinyin": "nán",
+              "meaning": "male; man"
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "title": "我在读大学",
+          "characters": [
+            {
+              "char": "时候",
+              "pinyin": "shíhou",
+              "meaning": "(a point in) time"
+            },
+            {
+              "char": "饭馆",
+              "pinyin": "fànguǎn",
+              "meaning": "restaurant"
+            },
+            {
+              "char": "知道",
+              "pinyin": "zhīdào",
+              "meaning": "know; realize"
+            },
+            {
+              "char": "正在",
+              "pinyin": "zhèngzài",
+              "meaning": "in the process of"
+            },
+            {
+              "char": "找",
+              "pinyin": "zhǎo",
+              "meaning": "look for"
+            },
+            {
+              "char": "开车",
+              "pinyin": "kāichē",
+              "meaning": "drive"
+            },
+            {
+              "char": "车",
+              "pinyin": "chē",
+              "meaning": "vehicle"
+            },
+            {
+              "char": "读",
+              "pinyin": "dú",
+              "meaning": "study; attend school"
+            },
+            {
+              "char": "大学",
+              "pinyin": "dàxué",
+              "meaning": "university; college"
+            },
+            {
+              "char": "大学生",
+              "pinyin": "dàxuéshēng",
+              "meaning": "college/university student"
+            },
+            {
+              "char": "学习",
+              "pinyin": "xuéxí",
+              "meaning": "study; learn"
+            },
+            {
+              "char": "医",
+              "pinyin": "yī",
+              "meaning": "medicine"
+            },
+            {
+              "char": "弟弟",
+              "pinyin": "dìdi",
+              "meaning": "younger brother"
+            },
+            {
+              "char": "起床",
+              "pinyin": "qǐchuáng",
+              "meaning": "get up; get out of bed"
+            },
+            {
+              "char": "睡觉",
+              "pinyin": "shuìjiào",
+              "meaning": "sleep"
+            },
+            {
+              "char": "睡",
+              "pinyin": "shuì",
+              "meaning": "sleep"
+            },
+            {
+              "char": "哪里",
+              "pinyin": "nǎli",
+              "meaning": "where"
+            },
+            {
+              "char": "问",
+              "pinyin": "wèn",
+              "meaning": "ask"
+            },
+            {
+              "char": "说",
+              "pinyin": "shuō",
+              "meaning": "say; talk"
+            },
+            {
+              "char": "要",
+              "pinyin": "yào",
+              "meaning": "want; wish"
+            },
+            {
+              "char": "小朋友",
+              "pinyin": "xiǎopéngyou",
+              "meaning": "child; kid"
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "title": "昨天下雪了",
+          "characters": [
+            {
+              "char": "天气",
+              "pinyin": "tiānqì",
+              "meaning": "weather"
+            },
+            {
+              "char": "下",
+              "pinyin": "xià",
+              "meaning": "(of rain, snow) come down; fall"
+            },
+            {
+              "char": "雨",
+              "pinyin": "yǔ",
+              "meaning": "rain"
+            },
+            {
+              "char": "有点儿",
+              "pinyin": "yǒudiǎnr",
+              "meaning": "a little; a bit"
+            },
+            {
+              "char": "觉得",
+              "pinyin": "juéde",
+              "meaning": "feel; think"
+            },
+            {
+              "char": "冷",
+              "pinyin": "lěng",
+              "meaning": "cold"
+            },
+            {
+              "char": "雪",
+              "pinyin": "xuě",
+              "meaning": "snow"
+            },
+            {
+              "char": "生病",
+              "pinyin": "shēngbìng",
+              "meaning": "fall ill"
+            },
+            {
+              "char": "看病",
+              "pinyin": "kànbìng",
+              "meaning": "see a doctor"
+            },
+            {
+              "char": "病",
+              "pinyin": "bìng",
+              "meaning": "illness; be sick"
+            },
+            {
+              "char": "一点儿",
+              "pinyin": "yīdiǎnr",
+              "meaning": "some; a little"
+            },
+            {
+              "char": "药",
+              "pinyin": "yào",
+              "meaning": "medicine"
+            },
+            {
+              "char": "天",
+              "pinyin": "tiān",
+              "meaning": "day"
+            },
+            {
+              "char": "回",
+              "pinyin": "huí",
+              "meaning": "return"
+            },
+            {
+              "char": "再",
+              "pinyin": "zài",
+              "meaning": "then; only then"
+            },
+            {
+              "char": "喝",
+              "pinyin": "hē",
+              "meaning": "drink"
+            },
+            {
+              "char": "热",
+              "pinyin": "rè",
+              "meaning": "hot; warm"
+            },
+            {
+              "char": "水",
+              "pinyin": "shuǐ",
+              "meaning": "water"
+            }
+          ]
+        },
+        {
+          "id": 13,
+          "title": "请给我一杯茶",
+          "characters": [
+            {
+              "char": "可以",
+              "pinyin": "kěyǐ",
+              "meaning": "can; may"
+            },
+            {
+              "char": "再",
+              "pinyin": "zài",
+              "meaning": "again; once more"
+            },
+            {
+              "char": "问题",
+              "pinyin": "wèntí",
+              "meaning": "question; problem"
+            },
+            {
+              "char": "打电话",
+              "pinyin": "dǎ diànhuà",
+              "meaning": "make a phone call"
+            },
+            {
+              "char": "一下",
+              "pinyin": "yīxià",
+              "meaning": "once; a little"
+            },
+            {
+              "char": "服务员",
+              "pinyin": "fúwùyuán",
+              "meaning": "attendant; waiter/waitress"
+            },
+            {
+              "char": "女士",
+              "pinyin": "nǚshì",
+              "meaning": "madam"
+            },
+            {
+              "char": "要",
+              "pinyin": "yào",
+              "meaning": "want; ask for"
+            },
+            {
+              "char": "早饭",
+              "pinyin": "zǎofàn",
+              "meaning": "breakfast"
+            },
+            {
+              "char": "这个",
+              "pinyin": "zhège",
+              "meaning": "this"
+            },
+            {
+              "char": "面包",
+              "pinyin": "miànbāo",
+              "meaning": "bread"
+            },
+            {
+              "char": "鸡蛋",
+              "pinyin": "jīdàn",
+              "meaning": "(hen's) egg"
+            },
+            {
+              "char": "半",
+              "pinyin": "bàn",
+              "meaning": "half"
+            },
+            {
+              "char": "给",
+              "pinyin": "gěi",
+              "meaning": "give"
+            },
+            {
+              "char": "杯",
+              "pinyin": "bēi",
+              "meaning": "cup (measure word)"
+            },
+            {
+              "char": "茶",
+              "pinyin": "chá",
+              "meaning": "tea"
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "title": "我看了一个电影",
+          "characters": [
+            {
+              "char": "上",
+              "pinyin": "shàng",
+              "meaning": "get on; board; go up"
+            },
+            {
+              "char": "开",
+              "pinyin": "kāi",
+              "meaning": "(of vehicles) depart; leave"
+            },
+            {
+              "char": "一些",
+              "pinyin": "yīxiē",
+              "meaning": "some"
+            },
+            {
+              "char": "有的",
+              "pinyin": "yǒude",
+              "meaning": "some"
+            },
+            {
+              "char": "了",
+              "pinyin": "le",
+              "meaning": "(aspect particle marking completion)"
+            },
+            {
+              "char": "写",
+              "pinyin": "xiě",
+              "meaning": "write"
+            },
+            {
+              "char": "都",
+              "pinyin": "dōu",
+              "meaning": "all; both"
+            },
+            {
+              "char": "听见",
+              "pinyin": "tīngjiàn",
+              "meaning": "hear"
+            },
+            {
+              "char": "不要",
+              "pinyin": "bùyào",
+              "meaning": "don't"
+            },
+            {
+              "char": "说话",
+              "pinyin": "shuōhuà",
+              "meaning": "speak; talk"
+            },
+            {
+              "char": "听",
+              "pinyin": "tīng",
+              "meaning": "listen"
+            },
+            {
+              "char": "哪些",
+              "pinyin": "nǎxiē",
+              "meaning": "which (plural)"
+            },
+            {
+              "char": "字",
+              "pinyin": "zì",
+              "meaning": "character; word"
+            },
+            {
+              "char": "汉字",
+              "pinyin": "Hànzì",
+              "meaning": "Chinese character"
+            },
+            {
+              "char": "明年",
+              "pinyin": "míngnián",
+              "meaning": "next year"
+            },
+            {
+              "char": "中学",
+              "pinyin": "zhōngxué",
+              "meaning": "middle school"
+            },
+            {
+              "char": "小学",
+              "pinyin": "xiǎoxué",
+              "meaning": "primary school"
+            },
+            {
+              "char": "中学生",
+              "pinyin": "zhōngxuéshēng",
+              "meaning": "middle school student"
+            },
+            {
+              "char": "小学生",
+              "pinyin": "xiǎoxuéshēng",
+              "meaning": "primary school student"
+            },
+            {
+              "char": "上学",
+              "pinyin": "shàngxué",
+              "meaning": "go to school"
+            },
+            {
+              "char": "他们",
+              "pinyin": "tāmen",
+              "meaning": "they"
+            },
+            {
+              "char": "她们",
+              "pinyin": "tāmen",
+              "meaning": "they (female)"
+            },
+            {
+              "char": "它们",
+              "pinyin": "tāmen",
+              "meaning": "they (things)"
+            },
+            {
+              "char": "晚",
+              "pinyin": "wǎn",
+              "meaning": "late"
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "title": "大兴机场见！",
+          "characters": [
+            {
+              "char": "北京",
+              "pinyin": "Běijīng",
+              "meaning": "Beijing"
+            },
+            {
+              "char": "好玩儿",
+              "pinyin": "hǎowánr",
+              "meaning": "fun; interesting"
+            },
+            {
+              "char": "飞机",
+              "pinyin": "fēijī",
+              "meaning": "airplane"
+            },
+            {
+              "char": "早饭",
+              "pinyin": "zǎofàn",
+              "meaning": "breakfast"
+            },
+            {
+              "char": "老朋友",
+              "pinyin": "lǎopéngyou",
+              "meaning": "old friend"
+            },
+            {
+              "char": "机场",
+              "pinyin": "jīchǎng",
+              "meaning": "airport"
+            },
+            {
+              "char": "送",
+              "pinyin": "sòng",
+              "meaning": "see off; give"
+            },
+            {
+              "char": "马上",
+              "pinyin": "mǎshàng",
+              "meaning": "immediately"
+            }
+          ]
+        }
+      ],
+      "_truncated": true,
+      "_original_chars": 109564
+    }
+  ]
+}

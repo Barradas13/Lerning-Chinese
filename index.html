@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A flashcard trainer for memorizing Chinese characters lesson by lesson or in a custom shuffled set.">
+<title>Chinese Flashcard Trainer</title>
+<style>
+/* ---------- Theme tokens ---------- */
+:root {
+  --bg: #f5f1ea;
+  --bg-accent: #efe6d9;
+  --surface: #fffdfa;
+  --surface-2: #faf6ef;
+  --ink: #20231f;
+  --muted: #6f6a61;
+  --line: #e4dccd;
+  --accent: #b3261e;
+  --accent-strong: #8c1a14;
+  --accent-soft: #fbeceb;
+  --on-accent: #ffffff;
+  --focus: #2563eb;
+  --radius-lg: 22px;
+  --radius-md: 13px;
+  --shadow: 0 24px 50px -36px rgba(40, 30, 18, 0.55);
+  --cjk: "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181a;
+    --bg-accent: #1d2023;
+    --surface: #1f2225;
+    --surface-2: #24282c;
+    --ink: #f2efe9;
+    --muted: #a6a29a;
+    --line: #353a3f;
+    --accent: #e5655c;
+    --accent-strong: #f08078;
+    --accent-soft: #3a2422;
+    --on-accent: #1a1211;
+    --focus: #7fb1ff;
+    --shadow: 0 24px 50px -36px rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--sans);
+  color: var(--ink);
+  line-height: 1.5;
+  background:
+    radial-gradient(1100px 560px at 12% -10%, var(--bg-accent), transparent 62%),
+    var(--bg);
+}
+button, select, input { font: inherit; color: inherit; }
+button { touch-action: manipulation; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+/* ---------- Layout / header ---------- */
+.page {
+  width: min(880px, 100%);
+  margin-inline: auto;
+  padding: clamp(18px, 4vw, 40px) clamp(14px, 3vw, 24px) 64px;
+}
+.app-header {
+  display: flex; flex-wrap: wrap; align-items: flex-end;
+  justify-content: space-between; gap: 12px;
+  margin-bottom: clamp(20px, 4vw, 32px);
+}
+.app-header h1 { margin: 0; font-size: clamp(1.45rem, 4vw, 2rem); letter-spacing: -0.02em; line-height: 1.2; }
+.app-header .subtitle { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
+.key-hint {
+  margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  color: var(--muted); font-size: 0.8rem;
+}
+kbd {
+  font-family: var(--sans); font-size: 0.72rem; font-weight: 650;
+  padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line);
+  border-bottom-width: 2px; background: var(--surface); color: var(--ink);
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  width: min(460px, 100%); margin: 0 auto clamp(18px, 3vw, 26px);
+  padding: 6px; background: var(--surface-2);
+  border: 1px solid var(--line); border-radius: 999px;
+}
+.tab {
+  appearance: none; border: 0; border-radius: 999px; background: transparent;
+  color: var(--muted); font-weight: 650; padding: 10px 14px; cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] {
+  background: var(--surface); color: var(--ink);
+  box-shadow: 0 2px 8px rgba(40, 30, 18, 0.08);
+}
+
+/* ---------- Panels ---------- */
+.panel {
+  padding: clamp(16px, 4vw, 28px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.panel:focus { outline: none; }
+.panel-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.field-label {
+  flex: none; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.select-wrapper { position: relative; flex: 1 1 260px; min-width: 0; }
+.select-wrapper::after {
+  content: ""; position: absolute; right: 15px; top: 50%;
+  width: 8px; height: 8px; pointer-events: none;
+  border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+  transform: translateY(-70%) rotate(45deg);
+}
+select {
+  width: 100%; appearance: none; cursor: pointer;
+  padding: 11px 38px 11px 14px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: var(--radius-md); font-weight: 600; text-overflow: ellipsis;
+}
+select:hover { border-color: rgba(179, 38, 30, 0.4); }
+.lesson-title { font-family: var(--cjk); }
+.pill {
+  flex: none; padding: 4px 10px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent-strong);
+  font-size: 0.78rem; font-weight: 650;
+}
+
+/* ---------- Progress ---------- */
+.status-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 18px; font-size: 0.85rem; color: var(--muted);
+}
+.progress-text {
+  font-weight: 700; color: var(--ink);
+  font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+}
+.progress-track {
+  height: 6px; margin-top: 8px; overflow: hidden;
+  border-radius: 999px; background: var(--line);
+}
+.progress-fill {
+  display: block; width: 0; height: 100%;
+  border-radius: inherit; background: var(--accent);
+  transition: width 0.22s ease;
+}
+
+/* ---------- Flashcard ---------- */
+.flashcard {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; width: 100%; min-height: clamp(270px, 44vh, 380px);
+  margin: 18px 0; padding: clamp(20px, 4vw, 32px);
+  text-align: center; cursor: pointer;
+  background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 70%);
+  border: 1px solid var(--line); border-radius: 20px;
+  transition: transform 0.16s ease, border-color 0.16s, box-shadow 0.16s;
+}
+.flashcard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(179, 38, 30, 0.35);
+  box-shadow: 0 18px 34px -30px rgba(40, 30, 18, 0.65);
+}
+.flashcard:active { transform: translateY(0); }
+.card-source {
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-family: var(--cjk); font-size: 0.8rem; color: var(--muted);
+}
+.char {
+  font-family: var(--cjk); font-weight: 600;
+  font-size: clamp(3.6rem, 16vw, 7rem); line-height: 1.15;
+  letter-spacing: 0.02em; overflow-wrap: anywhere;
+}
+.answer {
+  display: flex; flex-direction: column; justify-content: center; gap: 4px;
+  min-height: 4.4rem;
+  transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+.flashcard:not(.is-revealed) .answer { opacity: 0; visibility: hidden; }
+.pinyin {
+  font-size: clamp(1.15rem, 3vw, 1.45rem); font-weight: 650;
+  letter-spacing: 0.03em; color: var(--accent);
+}
+.meaning { font-size: 1rem; overflow-wrap: anywhere; }
+.card-hint {
+  margin-top: 6px; font-size: 0.72rem; font-weight: 650;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------- Buttons ---------- */
+.controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.controls .btn-wide { grid-column: 1 / -1; }
+@media (min-width: 560px) {
+  .controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .controls .btn-wide { grid-column: auto; }
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 10px 16px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: var(--radius-md);
+  background: var(--surface-2); font-weight: 650;
+  transition: background 0.16s, border-color 0.16s, color 0.16s, opacity 0.16s;
+}
+.btn:hover:not(:disabled) {
+  background: var(--accent-soft);
+  border-color: rgba(179, 38, 30, 0.4);
+}
+.btn-primary {
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-strong); border-color: var(--accent-strong);
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.controls-note {
+  margin: 12px 0 0; text-align: center;
+  font-size: 0.78rem; color: var(--muted);
+}
+.controls-note kbd { font-size: 0.68rem; }
+.back-row { margin-top: 16px; text-align: center; }
+
+/* ---------- Custom set setup ---------- */
+.setup-head {
+  display: flex; flex-wrap: wrap; align-items: flex-start;
+  justify-content: space-between; gap: 12px;
+}
+.setup-head h2 { margin: 0; font-size: 1.1rem; letter-spacing: -0.01em; }
+.setup-head p { max-width: 54ch; margin: 4px 0 0; color: var(--muted); font-size: 0.88rem; }
+.link-actions { display: flex; flex: none; gap: 6px; }
+.link-btn {
+  border: 0; border-radius: 8px; background: transparent; color: var(--accent);
+  padding: 6px 8px; font-size: 0.82rem; font-weight: 650; cursor: pointer;
+}
+.link-btn:hover { background: var(--accent-soft); }
+.lesson-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
+  gap: 8px; max-height: min(46vh, 420px); margin: 16px 0 0;
+  padding: 2px; overflow: auto; scrollbar-gutter: stable;
+}
+.lesson-option {
+  display: flex; align-items: flex-start; gap: 11px;
+  padding: 11px 12px; cursor: pointer;
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.lesson-option:hover { border-color: rgba(179, 38, 30, 0.35); }
+.lesson-option.is-checked { border-color: var(--accent); background: var(--accent-soft); }
+.lesson-option input {
+  flex: none; width: 18px; height: 18px; margin: 2px 0 0;
+  accent-color: var(--accent); cursor: pointer;
+}
+.lesson-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lesson-option .lesson-title { font-weight: 600; font-size: 0.95rem; line-height: 1.35; overflow-wrap: anywhere; }
+.lesson-count { color: var(--muted); font-size: 0.76rem; }
+.setup-footer {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line);
+}
+.selection-summary { color: var(--muted); font-size: 0.85rem; }
+@media (max-width: 520px) {
+  .setup-footer .btn { width: 100%; }
+}
+.game-topbar {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 8px 12px;
+}
+.game-topbar .card-source { font-size: 0.85rem; }
+
+/* ---------- Loading / errors ---------- */
+.loading {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 40px 16px; color: var(--muted);
+}
+.spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--line); border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.notice {
+  padding: 16px 18px; margin-bottom: 20px;
+  color: #7a1a14; background: #fdf0ee;
+  border: 1px solid #efc4bf; border-radius: 14px;
+}
+.notice h2 { margin: 0 0 6px; font-size: 1rem; }
+.notice p { margin: 0 0 12px; font-size: 0.9rem; line-height: 1.55; overflow-wrap: anywhere; }
+.notice .btn { background: #ffffff; border-color: #e7b3ad; color: #7a1a14; }
+@media (prefers-color-scheme: dark) {
+  .notice { color: #f3c6c1; background: #2a1b1a; border-color: #5c2d29; }
+  .notice .btn { color: #f3c6c1; background: #33201e; border-color: #5c2d29; }
+}
+
+/* ---------- Motion / small screens ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@media (max-width: 480px) {
+  .app-header { align-items: flex-start; }
+  .flashcard { min-height: 250px; }
+  .card-hint { font-size: 0.66rem; }
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <header class="app-header">
+      <div>
+        <h1>Chinese Flashcard Trainer</h1>
+        <p class="subtitle">Practice characters from your textbook, one lesson at a time.</p>
+      </div>
+      <p class="key-hint">
+        <kbd>Space</kbd> reveal
+        <span aria-hidden="true">&middot;</span>
+        <kbd>&larr;</kbd><kbd>&rarr;</kbd> navigate
+      </p>
+    </header>
+
+    <div id="loading" class="loading" role="status">
+      <span class="spinner" aria-hidden="true"></span>
+      <span>Loading textbook&hellip;</span>
+    </div>
+
+    <noscript>
+      <div class="notice">
+        <h2>JavaScript is required</h2>
+        <p>This flashcard trainer loads textbook.json and runs entirely in your browser. Please enable JavaScript and reload the page.</p>
+      </div>
+    </noscript>
+
+    <div id="loadError" class="notice" role="alert" hidden>
+      <h2>Couldn't load the textbook</h2>
+      <p id="loadErrorText"></p>
+      <button type="button" class="btn" id="retryBtn">Try again</button>
+    </div>
+
+    <main id="app" hidden>
+      <div class="tabs" role="tablist" aria-label="Practice mode">
+        <button type="button" class="tab" id="tabSingle" role="tab"
+                aria-selected="true" aria-controls="panelSingle">Single Lesson</button>
+        <button type="button" class="tab" id="tabCustom" role="tab"
+                aria-selected="false" aria-controls="panelCustom" tabindex="-1">Custom Set</button>
+      </div>
+
+      <!-- Game 1: one lesson at a time -->
+      <section class="panel" id="panelSingle" role="tabpanel" aria-labelledby="tabSingle" tabindex="-1">
+        <div class="panel-head">
+          <label for="lessonSelect" class="field-label">Lesson</label>
+          <div class="select-wrapper">
+            <select id="lessonSelect"></select>
+          </div>
+          <span class="pill" id="singleCount">0 cards</span>
+        </div>
+
+        <div class="status-row">
+          <span id="singleMeta">&mdash;</span>
+          <span class="progress-text" id="singleProgress">0 / 0</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <span class="progress-fill" id="singleProgressBar"></span>
+        </div>
+
+        <button type="button" class="flashcard" id="singleCard"
+                aria-expanded="false" aria-controls="singleAnswer">
+          <span class="char" id="singleChar">&mdash;</span>
+          <span class="answer" id="singleAnswer" aria-live="polite">
+            <span class="pinyin" id="singlePinyin"></span>
+            <span class="meaning" id="singleMeaning"></span>
+          </span>
+          <span class="card-hint" id="singleHint">Click or press Space to reveal</span>
+        </button>
+
+        <div class="controls">
+          <button type="button" class="btn" id="singlePrev">&larr; Previous</button>
+          <button type="button" class="btn" id="singleNext">Next &rarr;</button>
+          <button type="button" class="btn btn-wide" id="singleShuffle">Shuffle</button>
+        </div>
+        <p class="controls-note">Use <kbd>&larr;</kbd> and <kbd>&rarr;</kbd> to move. Navigation wraps around.</p>
+      <!-- Game 2: pooled custom set -->
+      <section class="panel" id="panelCustom" role="tabpanel" aria-labelledby="tabCustom" tabindex="-1" hidden>
+        <div id="customSetup">
+          <div class="setup-head">
+            <div>
+              <h2>Choose lessons</h2>
+              <p>Pick one or more lessons. Their characters are pooled together and shuffled into one deck.</p>
+            </div>
+            <div class="link-actions">
+              <button type="button" class="link-btn" id="selectAllBtn">Select all</button>
+              <button type="button" class="link-btn" id="clearAllBtn">Clear</button>
+            </div>
+          </div>
+
+          <div class="lesson-list" id="lessonList" role="group" aria-label="Lessons"></div>
+
+          <div class="setup-footer">
+            <span class="selection-summary" id="selectionSummary">0 lessons &middot; 0 cards selected</span>
+            <button type="button" class="btn btn-primary" id="startCustomBtn" disabled>Start Game</button>
+          </div>
+        </div>
+
+        <div id="customGame" hidden>
+          <div class="game-topbar">
+            <span class="card-source" id="customSource"></span>
+            <span class="progress-text" id="customProgress">0 / 0</span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <span class="progress-fill" id="customProgressBar"></span>
+          </div>
+
+          <button type="button" class="flashcard" id="customCard"
+                  aria-expanded="false" aria-controls="customAnswer">
+            <span class="char" id="customChar">&mdash;</span>
+            <span class="answer" id="customAnswer" aria-live="polite">
+              <span class="pinyin" id="customPinyin"></span>
+              <span class="meaning" id="customMeaning"></span>
+            </span>
+            <span class="card-hint" id="customHint">Click or press Space to reveal</span>
+          </button>
+
+          <div class="controls">
+            <button type="button" class="btn" id="customPrev">&larr; Previous</button>
+            <button type="button" class="btn" id="customNext">Next &rarr;</button>
+            <button type="button" class="btn btn-wide" id="customRestart">Restart</button>
+          </div>
+          <p class="controls-note">Restart reshuffles the pooled deck. Navigation wraps around.</p>
+          <div class="back-row">
+            <button type="button" class="link-btn" id="backBtn">&larr; Back to lesson selection</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+
+    /* ------------------------------------------------------------------
+     * Configuration and state
+     * ------------------------------------------------------------------ */
+    const TEXTBOOK_URL = "textbook.json";
+    const ANSWER_PLACEHOLDER = "\u2014";
+
+    const $ = (id) => document.getElementById(id);
+
+    let lessons = [];          // Normalized lessons, built from textbook.json.
+    let activeTab = "single";  // "single" or "custom".
+    let loading = false;
+
+    // Game 1 state: a per-lesson shuffled order that the player steps through.
+    const single = { lessonIndex: 0, order: [], pos: 0, revealed: false };
+
+    // Game 2 state: selected lesson indexes, a pooled deck, and setup/play phase.
+    const custom = { selected: new Set(), phase: "setup", deck: [], pos: 0, revealed: false };
+
+    /* ------------------------------------------------------------------
+     * Small utilities
+     * ------------------------------------------------------------------ */
+
+    /** Return a new array shuffled with the Fisher-Yates algorithm. */
+    function shuffleArray(items) {
+      const result = items.slice();
+      for (let i = result.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    /** Grammar helper for labels such as "1 card" / "3 cards". */
+    function plural(count, singular, pluralForm) {
+      return count === 1 ? singular : pluralForm;
+    }
+
+    /** Write one line of text into an element (textContent keeps data safe). */
+    function setText(id, text) {
+      $(id).textContent = text;
+    }
+
+    /* ------------------------------------------------------------------
+     * Data loading and validation
+     * ------------------------------------------------------------------ */
+
+    /**
+     * Walk the parsed JSON and collect lesson objects. The app accepts both
+     * a flat export ({ lessons: [{ id, title, characters }] }) and the
+     * wrapped export produced by the extraction pipeline, where a metadata
+     * object contains its own nested "lessons" array. Extra wrapper levels
+     * are followed so both shapes work without touching the data.
+     */
+    function collectLessons(entries, out, depth) {
+      if (depth > 8) {
+        throw new Error('Unexpected format: "lessons" arrays are nested too deeply.');
+      }
+      for (const entry of entries) {
+        if (!entry || typeof entry !== "object") {
+          throw new Error('Unexpected format: every item in "lessons" must be an object.');
+        }
+        if (Array.isArray(entry.characters)) {
+          out.push(entry);
+        } else if (Array.isArray(entry.lessons)) {
+          collectLessons(entry.lessons, out, depth + 1);
+        } else {
+          const label = typeof entry.title === "string" && entry.title.trim()
+            ? `"${entry.title.trim()}"`
+            : `#${out.length + 1}`;
+          throw new Error(`Unexpected format: lesson ${label} has no "characters" array.`);
+        }
+      }
+    }
+
+    /**
+     * Validate the raw JSON and return a clean, predictable lesson list.
+     * Throws an Error with a human-readable message when the file is malformed.
+     */
+    function normalizeTextbook(raw) {
+      const roots = Array.isArray(raw)
+        ? raw
+        : raw && typeof raw === "object" && Array.isArray(raw.lessons)
+          ? raw.lessons
+          : null;
+
+      if (!roots) {
+        throw new Error('Unexpected format: expected a top-level object with a "lessons" array.');
+      }
+
+      const collected = [];
+      collectLessons(roots, collected, 0);
+
+      const normalized = collected.map((lesson, lessonIndex) => {
+        const rawTitle = typeof lesson.title === "string" ? lesson.title.trim() : "";
+        const title = rawTitle || `Lesson ${lessonIndex + 1}`;
+        const id = lesson.id !== undefined && lesson.id !== null ? lesson.id : lessonIndex + 1;
+
+        const characters = lesson.characters.map((entry, charIndex) => {
+          if (!entry || typeof entry !== "object" || typeof entry.char !== "string" || !entry.char.trim()) {
+            throw new Error(
+              `Lesson "${title}" has an invalid entry at position ${charIndex + 1}: ` +
+              'each character needs a non-empty "char" string.'
+            );
+          }
+          return {
+            char: entry.char.trim(),
+            pinyin: typeof entry.pinyin === "string" ? entry.pinyin.trim() : "",
+            meaning: typeof entry.meaning === "string" ? entry.meaning.trim() : ""
+          };
+        });
+
+        return { id, title, characters };
+      }).filter((lesson) => lesson.characters.length > 0);
+
+      if (normalized.length === 0) {
+        throw new Error("No lessons with characters were found in the file.");
+      }
+      return normalized;
+    }
+
+    /* ------------------------------------------------------------------
+     * Fetch textbook.json, validate it, and report failures in the UI
+     * ------------------------------------------------------------------ */
+
+    /** Load the JSON file, validate it, and start the app (or show an error). */
+    async function loadTextbook() {
+      loading = true;
+      $("loading").hidden = false;
+      $("loadError").hidden = true;
+      $("app").hidden = true;
+
+      try {
+        let response;
+        try {
+          response = await fetch(TEXTBOOK_URL, { cache: "no-store" });
+        } catch (error) {
+          throw new Error(
+            "The file could not be fetched. If this page was opened directly from disk (file://), " +
+            "browsers block fetch(); serve the folder with a local web server instead " +
+            "(for example: python -m http.server 8000) and open http://localhost:8000. " +
+            "Also make sure textbook.json sits next to index.html."
+          );
+        }
+
+        if (!response.ok) {
+          throw new Error(
+            `The request returned HTTP ${response.status}` +
+            `${response.statusText ? ` (${response.statusText})` : ""}. ` +
+            "Make sure textbook.json sits next to index.html."
+          );
+        }
+
+        let raw;
+        try {
+          raw = await response.json();
+        } catch (error) {
+          throw new Error(
+            `The file is not valid JSON.${error && error.message ? ` Details: ${error.message}` : ""}`
+          );
+        }
+
+        applyTextbook(normalizeTextbook(raw));
+      } catch (error) {
+        lessons = [];
+        $("loadErrorText").textContent = error && error.message
+          ? error.message
+          : "An unknown error occurred while loading the textbook.";
+        $("loadError").hidden = false;
+      } finally {
+        loading = false;
+        $("loading").hidden = true;
+      }
+    }
+
+    /** Reset both games with a validated lesson list and reveal the app. */
+    function applyTextbook(data) {
+      lessons = data;
+
+      single.lessonIndex = 0;
+      single.order = [];
+      single.pos = 0;
+      single.revealed = false;
+
+      custom.selected.clear();
+      custom.phase = "setup";
+      custom.deck = [];
+      custom.pos = 0;
+      custom.revealed = false;
+
+      renderLessonSelect();
+      renderLessonCheckboxes();
+      setupSingleLesson(0);
+
+      $("customSetup").hidden = false;
+      $("customGame").hidden = true;
+      $("loadError").hidden = true;
+      $("app").hidden = false;
+      switchTab("single");
+    }
+
+    /* ------------------------------------------------------------------
+     * Lesson pickers
+     * ------------------------------------------------------------------ */
+
+    /** Fill the Game 1 dropdown with every lesson, showing its id and title. */
+    function renderLessonSelect() {
+      const select = $("lessonSelect");
+      select.innerHTML = "";
+      lessons.forEach((lesson, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = `Lesson ${lesson.id} \u2014 ${lesson.title}`;
+        select.append(option);
+      });
+      select.value = "0";
+    }
+
+    /** Build the Game 2 checkbox list from every lesson. */
+    function renderLessonCheckboxes() {
+      const list = $("lessonList");
+      list.innerHTML = "";
+
+      lessons.forEach((lesson, index) => {
+        const label = document.createElement("label");
+        label.className = "lesson-option";
+
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.value = String(index);
+        input.checked = custom.selected.has(index);
+        input.addEventListener("change", () => {
+          if (input.checked) {
+            custom.selected.add(index);
+          } else {
+            custom.selected.delete(index);
+          }
+          label.classList.toggle("is-checked", input.checked);
+          updateCustomSetupState();
+        });
+
+        const copy = document.createElement("span");
+        copy.className = "lesson-copy";
+
+        const title = document.createElement("span");
+        title.className = "lesson-title";
+        title.textContent = lesson.title;
+
+        const count = document.createElement("span");
+        count.className = "lesson-count";
+        count.textContent = `${lesson.characters.length} ${plural(lesson.characters.length, "card", "cards")}`;
+
+        copy.append(title, count);
+        label.classList.toggle("is-checked", input.checked);
+        label.append(input, copy);
+        list.append(label);
+      });
+
+      updateCustomSetupState();
+    }
+
+    /** Enable "Start Game" only when at least one lesson is checked. */
+    function updateCustomSetupState() {
+      let cardCount = 0;
+      custom.selected.forEach((index) => {
+        cardCount += lessons[index] ? lessons[index].characters.length : 0;
+      });
+
+      const lessonCount = custom.selected.size;
+      setText(
+        "selectionSummary",
+        `${lessonCount} ${plural(lessonCount, "lesson", "lessons")} \u00b7 ` +
+        `${cardCount} ${plural(cardCount, "card", "cards")} selected`
+      );
+      $("startCustomBtn").disabled = lessonCount === 0;
+    }
+
+    /** Reflect the selected set back onto the checkbox inputs. */
+    function syncCheckboxes() {
+      $("lessonList").querySelectorAll('input[type="checkbox"]').forEach((input) => {
+        const index = Number(input.value);
+        input.checked = custom.selected.has(index);
+        input.closest(".lesson-option").classList.toggle("is-checked", input.checked);
+      });
+    }
+
+    /** Convenience: check every lesson. */
+    function selectAllLessons() {
+      lessons.forEach((lesson, index) => custom.selected.add(index));
+      syncCheckboxes();
+      updateCustomSetupState();
+    }
+
+    /** Convenience: uncheck everything and disable the start button. */
+    function clearLessonSelection() {
+      custom.selected.clear();
+      syncCheckboxes();
+      updateCustomSetupState();
+    }
+
+    /* ------------------------------------------------------------------
+     * Game 1: per-lesson memorization
+     * ------------------------------------------------------------------ */
+
+    /** Start a lesson from its first card, in textbook order. */
+    function setupSingleLesson(lessonIndex) {
+      const lesson = lessons[lessonIndex];
+      if (!lesson) return;
+
+      single.lessonIndex = lessonIndex;
+      single.order = lesson.characters.map((character, index) => index);
+      single.pos = 0;
+      single.revealed = false;
+
+      setText("singleCount", `${lesson.characters.length} ${plural(lesson.characters.length, "card", "cards")}`);
+      setText("singleMeta", `Lesson ${lesson.id}`);
+      renderSingleCard();
+    }
+
+    /** The character object currently shown in Game 1 (or null). */
+    function currentSingleCard() {
+      const lesson = lessons[single.lessonIndex];
+      if (!lesson || !single.order.length) return null;
+      return lesson.characters[single.order[single.pos]];
+    }
+
+    /** Paint the Game 1 card, progress text, and progress bar. */
+    function renderSingleCard() {
+      const card = currentSingleCard();
+      if (!card) return;
+
+      setText("singleChar", card.char);
+      setText("singlePinyin", card.pinyin || ANSWER_PLACEHOLDER);
+      setText("singleMeaning", card.meaning || ANSWER_PLACEHOLDER);
+
+      setText("singleProgress", `${single.pos + 1} / ${single.order.length}`);
+      $("singleProgressBar").style.width =
+        `${((single.pos + 1) / single.order.length) * 100}%`;
+
+      setSingleRevealed(single.revealed);
+    }
+
+    /** Show or hide the answer under the Game 1 character. */
+    function setSingleRevealed(revealed) {
+      single.revealed = revealed;
+      const card = $("singleCard");
+      card.classList.toggle("is-revealed", revealed);
+      card.setAttribute("aria-expanded", String(revealed));
+      setText("singleHint", revealed ? "Click or press Space to hide" : "Click or press Space to reveal");
+    }
+
+    /** Reveal/hide the answer; returns true when the key press was handled. */
+    function toggleSingleReveal() {
+      if (!currentSingleCard()) return false;
+      setSingleRevealed(!single.revealed);
+      return true;
+    }
+
+    /** Step through the lesson, wrapping around at both ends. */
+    function moveSingle(delta) {
+      if (!single.order.length) return;
+      single.pos = (single.pos + delta + single.order.length) % single.order.length;
+      single.revealed = false;
+      renderSingleCard();
+    }
+
+    /** Shuffle this lesson's cards and restart at the first one. */
+    function shuffleSingleLesson() {
+      const lesson = lessons[single.lessonIndex];
+      if (!lesson) return;
+      single.order = shuffleArray(lesson.characters.map((character, index) => index));
+      single.pos = 0;
+      single.revealed = false;
+      renderSingleCard();
+    }
+
+    /* ------------------------------------------------------------------
+     * Game 2: custom pooled set
+     * ------------------------------------------------------------------ */
+
+    /** Pool the checked lessons, shuffle them into one deck, and start playing. */
+    function startCustomGame() {
+      if (!custom.selected.size) return;
+
+      const pool = [];
+      lessons.forEach((lesson, index) => {
+        if (!custom.selected.has(index)) return;
+        lesson.characters.forEach((character) => {
+          pool.push({
+            char: character.char,
+            pinyin: character.pinyin,
+            meaning: character.meaning,
+            lessonLabel: `Lesson ${lesson.id} \u00b7 ${lesson.title}`
+          });
+        });
+      });
+
+      custom.deck = shuffleArray(pool);
+      custom.pos = 0;
+      custom.revealed = false;
+      custom.phase = "playing";
+
+      $("customSetup").hidden = true;
+      $("customGame").hidden = false;
+      renderCustomCard();
+    }
+
+    /** The pooled character currently shown in Game 2 (or null). */
+    function currentCustomCard() {
+      return custom.deck[custom.pos] || null;
+    }
+
+    /** Paint the Game 2 card, source lesson, progress text, and bar. */
+    function renderCustomCard() {
+      const card = currentCustomCard();
+      if (!card) return;
+
+      setText("customChar", card.char);
+      setText("customPinyin", card.pinyin || ANSWER_PLACEHOLDER);
+      setText("customMeaning", card.meaning || ANSWER_PLACEHOLDER);
+      setText("customSource", `From ${card.lessonLabel}`);
+
+      setText("customProgress", `${custom.pos + 1} / ${custom.deck.length}`);
+      $("customProgressBar").style.width =
+        `${((custom.pos + 1) / custom.deck.length) * 100}%`;
+
+      setCustomRevealed(custom.revealed);
+    }
+
+    /** Show or hide the answer under the Game 2 character. */
+    function setCustomRevealed(revealed) {
+      custom.revealed = revealed;
+      const card = $("customCard");
+      card.classList.toggle("is-revealed", revealed);
+      card.setAttribute("aria-expanded", String(revealed));
+      setText("customHint", revealed ? "Click or press Space to hide" : "Click or press Space to reveal");
+    }
+
+    /** Reveal/hide the answer; returns true when the key press was handled. */
+    function toggleCustomReveal() {
+      if (custom.phase !== "playing" || !currentCustomCard()) return false;
+      setCustomRevealed(!custom.revealed);
+      return true;
+    }
+
+    /** Step through the pooled deck, wrapping around at both ends. */
+    function moveCustom(delta) {
+      if (custom.phase !== "playing" || !custom.deck.length) return;
+      custom.pos = (custom.pos + delta + custom.deck.length) % custom.deck.length;
+      custom.revealed = false;
+      renderCustomCard();
+    }
+
+    /** Reshuffle the existing pooled deck and start over. */
+    function restartCustomGame() {
+      if (!custom.deck.length) return;
+      custom.deck = shuffleArray(custom.deck);
+      custom.pos = 0;
+      custom.revealed = false;
+      renderCustomCard();
+    }
+
+    /** Leave the game and return to the checkbox selection screen. */
+    function backToCustomSetup() {
+      custom.phase = "setup";
+      custom.deck = [];
+      custom.pos = 0;
+      custom.revealed = false;
+      $("customGame").hidden = true;
+      $("customSetup").hidden = false;
+      updateCustomSetupState();
+    }
+
+    /* ------------------------------------------------------------------
+     * Tabs, keyboard support, and startup
+     * ------------------------------------------------------------------ */
+
+    /** Show one game panel and update the tab states. */
+    function switchTab(tab) {
+      activeTab = tab;
+      const isSingle = tab === "single";
+      const singleTab = $("tabSingle");
+      const customTab = $("tabCustom");
+
+      singleTab.setAttribute("aria-selected", String(isSingle));
+      customTab.setAttribute("aria-selected", String(!isSingle));
+      singleTab.tabIndex = isSingle ? 0 : -1;
+      customTab.tabIndex = isSingle ? -1 : 0;
+
+      $("panelSingle").hidden = !isSingle;
+      $("panelCustom").hidden = isSingle;
+    }
+
+    /** Wire a button to an action; after mouse clicks, drop focus so Space
+     *  returns to revealing the card instead of re-activating the button. */
+    function bindActionButton(button, action) {
+      button.addEventListener("click", (event) => {
+        action();
+        if (event.detail > 0) button.blur();
+      });
+    }
+
+    /** Wire a tab button, keeping focus behavior keyboard-friendly. */
+    function bindTabButton(button, tab) {
+      button.addEventListener("click", (event) => {
+        switchTab(tab);
+        if (event.detail > 0) button.blur();
+      });
+    }
+
+    /**
+     * Global shortcuts: Space reveals, Left/Right navigate. Native form
+     * controls and focused buttons keep their normal keyboard behavior.
+     */
+    function handleGlobalKeydown(event) {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+      if (loading || $("app").hidden) return;
+
+      const target = event.target;
+      const tag = target && target.tagName ? target.tagName.toUpperCase() : "";
+      const isFormField = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" ||
+        (target && target.isContentEditable);
+      if (isFormField) return;
+
+      const isArrow = event.key === "ArrowLeft" || event.key === "ArrowRight";
+
+      // Standard tab-list behavior: arrows move focus between the two tabs.
+      if (isArrow && target && target.classList && target.classList.contains("tab")) {
+        const nextTab = activeTab === "single" ? "custom" : "single";
+        switchTab(nextTab);
+        $(nextTab === "single" ? "tabSingle" : "tabCustom").focus();
+        event.preventDefault();
+        return;
+      }
+
+      if (event.key === " " || event.key === "Spacebar" || event.code === "Space") {
+        // A focused button (card, navigation, tab) already handles Space itself.
+        if (tag === "BUTTON") return;
+        const handled = activeTab === "single" ? toggleSingleReveal() : toggleCustomReveal();
+        if (handled) event.preventDefault();
+        return;
+      }
+
+      if (!isArrow) return;
+
+      const delta = event.key === "ArrowRight" ? 1 : -1;
+      if (activeTab === "single") {
+        moveSingle(delta);
+      } else if (custom.phase === "playing") {
+        moveCustom(delta);
+      } else {
+        return;
+      }
+      event.preventDefault();
+    }
+
+    /** Attach all event listeners and load the textbook. */
+    function init() {
+      // Game 1
+      $("lessonSelect").addEventListener("change", (event) => {
+        setupSingleLesson(Number(event.target.value));
+      });
+      $("singleCard").addEventListener("click", () => toggleSingleReveal());
+      bindActionButton($("singlePrev"), () => moveSingle(-1));
+      bindActionButton($("singleNext"), () => moveSingle(1));
+      bindActionButton($("singleShuffle"), shuffleSingleLesson);
+
+      // Game 2
+      bindActionButton($("selectAllBtn"), selectAllLessons);
+      bindActionButton($("clearAllBtn"), clearLessonSelection);
+      bindActionButton($("startCustomBtn"), startCustomGame);
+      $("customCard").addEventListener("click", () => toggleCustomReveal());
+      bindActionButton($("customPrev"), () => moveCustom(-1));
+      bindActionButton($("customNext"), () => moveCustom(1));
+      bindActionButton($("customRestart"), restartCustomGame);
+      bindActionButton($("backBtn"), backToCustomSetup);
+
+      // Tabs and loading
+      bindTabButton($("tabSingle"), "single");
+      bindTabButton($("tabCustom"), "custom");
+      $("retryBtn").addEventListener("click", loadTextbook);
+      document.addEventListener("keydown", handleGlobalKeydown);
+
+      loadTextbook();
+    }
+
+    init();
+  </script>
+</body>
+</html>

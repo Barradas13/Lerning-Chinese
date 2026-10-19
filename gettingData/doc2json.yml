@@ -1,0 +1,11 @@
+# doc2json Configuration
+# Schema name determines all paths by convention:
+#   schemas/<name>.py, sources/<name>/, outputs/<name>.jsonl
+
+schemas:
+  - example  # Simple: just the schema name
+llm:
+  provider: openai
+  base_url: https://hpc-api.westlake.edu.cn/v1
+  api_key: ${YOUR_UNIVERSITY_API_KEY}
+  model: deepseek-flash
