@@ -1,0 +1,11 @@
+# ------------------------------------------------------------------
+# Local-only files - never committed
+# ------------------------------------------------------------------
+
+# HSK textbook PDFs (very large binaries).
+# They stay on this machine; clones download them separately if needed.
+*.pdf
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
